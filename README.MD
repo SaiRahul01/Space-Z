@@ -17,4 +17,4 @@
 4. Run `npm start` in the Root Directory of the Project.
 5. Scan the QR Code shown in the Terminal using the  Expo Go App
 
-### `NOTE`  The Nasa Api used here is Outdated , and this project was done only for the sake of my knowledge with using the  APIs
+ `NOTE`  The Nasa Api used here is Outdated , and this project was done only for the sake of my knowledge with using the  APIs
