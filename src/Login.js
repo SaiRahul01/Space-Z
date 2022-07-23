@@ -1,10 +1,13 @@
-import { View, Text, StyleSheet,TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet,TextInput, TouchableOpacity, ToastAndroid,AsyncStorage } from 'react-native'
 import React from 'react'
 import FA from 'react-native-vector-icons/FontAwesome'
+import II from 'react-native-vector-icons/Ionicons'
 
-const Login = () => {
+const Login = (props) => {
     const loginuser=()=>{
         ToastAndroid.show("Logged into Space !",2000)
+        props.setisloggedin(true)
+        AsyncStorage.setItem("isloggedin",true)
     }
 
 
@@ -17,9 +20,7 @@ const Login = () => {
       </View>
 
       <View style={{marginLeft:30,marginRight:30,marginTop:50,padding:10,flexDirection:'row',justifyContent:'space-around',alignItems:'center'}}>
-        <View>
-        <FA name='space-shuttle' style={{color:'white',transform:[{rotate:'0deg'}]}} size={40}/>
-        </View>
+       
         <View style={{flexGrow:3,marginLeft:30}}>
         <TextInput placeholder='Enter Key' placeholderTextColor={'white'} style={{borderWidth:0,borderColor:'white',padding:15,backgroundColor:'#5F939A',height:50,color:'white'}} selectionColor='white' secureTextEntry={true}/>
         </View>
@@ -32,6 +33,7 @@ const Login = () => {
        <View style={ss.btn}>
        
        <Text style={{color:'white',fontSize:20}}>Take Me In</Text>
+       <II name='md-rocket-outline' size={25} style={{color:'white'}}/>
        
        </View>
       </View>
@@ -56,13 +58,16 @@ const ss=StyleSheet.create({
     btn:{
       borderWidth:1,
       borderColor:'red',
-      height:40,
-      marginLeft:70,
+      height:60,
+      marginLeft:40,
       marginRight:70,
       justifyContent:'center',
       alignItems:'center',
       backgroundColor:'#EA4C89',
-      borderRadius:3
+      borderRadius:5,
+      width:180,
+      flexDirection:'row',
+      justifyContent:'space-around'
     }
 })
 

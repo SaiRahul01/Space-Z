@@ -1,42 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, ImageBackground, Pressable, StyleSheet, Text, View ,AsyncStorage} from 'react-native';
 import Axios from 'axios';
 import { useState } from 'react';
 import Login from './src/Login';
 import mainbg from './assets/images/mainbg.jpg'
+import { NavigationContainer } from '@react-navigation/native';
 import { config } from './config';
-export default function App() {
-  const [imgurl, setimgurl] = useState('')
-  const [isloggedin, setisloggedin] = useState(true)
+import Tabs from './src/TabNavigation/Tabs';
 
-  const doit=()=>{
-    const urll = 'https://api.nasa.gov/planetary/apod?api_key=' + config['API-KEY']
-      Axios.get(urll).then((resp)=>{
-        console.log(resp.data.url);
-        setimgurl(resp.data.url)
-      })
-  }
+
+export default function App() {
+ 
+  const [isloggedin, setisloggedin] = useState(false)
+
+
 
   
 
-  if(isloggedin)
+  if( AsyncStorage.getItem("isloggedin")===true   || isloggedin)
   {
     return (
-        <View style={styles.container}>
+        // <View style={styles.container}>
       
-          <Pressable onPress={doit}>
-          <Text>Get</Text>
-          </Pressable>
-          {imgurl?<Image source={{uri:imgurl}} resizeMode="cover" style={{height:180,width:180}} />:<Text></Text>}
+        //   <Pressable onPress={doit}>
+        //   <Text>Get</Text>
+        //   </Pressable>
+        //   {imgurl?<Image source={{uri:imgurl}} resizeMode="cover" style={{height:180,width:180}} />:<Text></Text>}
           
-          <StatusBar style="auto" />
+        //   <StatusBar style="auto" />
         
-        </View>
+        // </View>
+        <NavigationContainer>
+          <Tabs isloggedin={isloggedin} setisloggedin={setisloggedin} />
+        </NavigationContainer>
     )
   }
   return (<ImageBackground source={mainbg}  resizeMode="cover" style={{flex:1,justifyContent:'center',height:'100%',width:'100%'}}>
               <View >
-                  <Login/>
+                  <Login isloggedin={isloggedin} setisloggedin={setisloggedin}/>
               </View>
           </ImageBackground>)
 }
