@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { LogBox } from 'react-native';
 import { Image, ImageBackground, Pressable, StyleSheet, Text, View ,AsyncStorage} from 'react-native';
 import Axios from 'axios';
 import { useState } from 'react';
@@ -10,6 +11,7 @@ import Tabs from './src/TabNavigation/Tabs';
 
 
 export default function App() {
+  LogBox.ignoreAllLogs()
  
   const [isloggedin, setisloggedin] = useState(false)
 
